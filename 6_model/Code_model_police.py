@@ -125,6 +125,7 @@ def family_house_price():
 
 
 def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work, dic_id_change_home):
+    dic_home_capacity=copy.deepcopy(dic_home)
     for h in dic_home_capacity:
         dic_home_capacity[h] = 0
     file = open('D:/main_code/model/result_model_police.txt', 'w')
