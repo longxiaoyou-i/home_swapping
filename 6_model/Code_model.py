@@ -91,6 +91,7 @@ def family_house_price():
 
 def model(dic_home_one_two,dic_home_three_four,dic_home,dic_home_price,dic_work):
     ###model
+    dic_home_capacity=copy.deepcopy(dic_home)
     file = open('D:/main_code/model/result_model.txt', 'w')
     for h in dic_home_capacity:
         dic_home_capacity[h] = 0  # the household at the initiak place of residence to 0
