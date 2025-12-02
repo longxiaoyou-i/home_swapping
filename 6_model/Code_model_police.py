@@ -383,7 +383,7 @@ def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_w
                     lat_w4 = float(dic_id_workplace[dic_work[j][3]].split(',')[0])
                     dis_worker4 = round(get_distance(lon_w4, lat_w4, lon_h, lat_h), 4)
                     A = capacity * (1 + capacity_select) / pow(
-                        (dis_worker1 * dis_worker2 * dis_worker3 * dis_worker4) + 1, 1 / 4)
+                            ((dis_worker1+1) * (dis_worker2+1) * (dis_worker3+1) * (dis_worker4+1)), 1 / 4)
                     E = 1 - abs(origin_price - change_price) / origin_price
                     if h in dic_home_three_four:
                         if E > 0 and dic_home_three_four[h] > 0:
@@ -453,7 +453,7 @@ def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_w
                         lat_w4 = float(dic_id_workplace[dic_work[j][3]].split(',')[0])
                         dis_worker4 = round(get_distance(lon_w4, lat_w4, lon_h, lat_h), 4)
                         A = capacity * (1 + capacity_select) / pow(
-                            (dis_worker1 * dis_worker2 * dis_worker3 * dis_worker4) + 1, 1 / 4)
+                            ((dis_worker1+1) * (dis_worker2+1) * (dis_worker3+1) * (dis_worker4+1)), 1 / 4)
                         E = 1 - abs(origin_price - change_price) / origin_price
                         if h in dic_home_three_four:
                             if dic_home_three_four[h] > 0:
