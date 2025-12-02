@@ -472,9 +472,7 @@ def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_w
                 if dic_select_home_P_range[n][0] <= m < dic_select_home_P_range[n][1]:
                     select_home.append(n)
             o = random.choice(select_home)
-            sum_select_same_home_opt = 0
             dic_home_select[j] = o
-            sum_select_same_home_opt = sum_select_same_home_opt + 1
             if len(dic_work[j]) == 1 or len(dic_work[j]) == 2:
                 if o not in dic_home_id_select_one_two.keys():
                     dic_home_id_select_one_two[o] = [j]
@@ -486,7 +484,6 @@ def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_w
                     dic_home_id_select_three_four[o] = [j]
                 else:
                     dic_home_id_select_three_four[o] = dic_home_id_select_three_four[o] + [j]
-
 
             if o not in dic_home_id_select.keys():
                 dic_home_id_select[o] = [j]
