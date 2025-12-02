@@ -93,7 +93,7 @@ def home_capacity():  #
                 dic_home[home] = 4
             else:
                 dic_home[home] = dic_home[home] + 4
-    return dic_home_one_two, dic_home_three_four, dic_home
+    return dic_home_one_two, dic_home_three_four, dic_home, dic_id_workplace,dic_id_home
 
 
 def household_id_member():  # household_id:household_member_id
@@ -124,7 +124,7 @@ def family_house_price():
     return dic_home_price
 
 
-def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work, dic_id_change_home):
+def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work,dic_id_workplace,dic_id_home):
     dic_home_capacity=copy.deepcopy(dic_home)
     for h in dic_home_capacity:
         dic_home_capacity[h] = 0
@@ -579,7 +579,7 @@ if __name__ == '__main__':
         center = str(lat3) + ',' + str(lon3)
         point_center_linkid[origin] = (origin_center, center, line[3])
     dic_id_change_home = id_change_home()
-    dic_home_one_two, dic_home_three_four, dic_home = home_capacity()
+    dic_home_one_two, dic_home_three_four, dic_home, dic_id_workplace,dic_id_home = home_capacity()
     dic_work = household_id_member()
     dic_home_price = family_house_price()
-    model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work)
+    model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work,dic_id_workplace,dic_id_home)
