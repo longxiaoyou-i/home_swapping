@@ -97,7 +97,7 @@ def model(dic_home_one_two,dic_home_three_four,dic_home,dic_home_price,dic_work)
         dic_home_capacity[h] = 0  # the household at the initiak place of residence to 0
     while len(dic_work) > 0:  # the process only ceased once all households had been allocated their places of residence
         list_worker_family = list(dic_work.keys())  # households
-        if len(list_worker_family) > 1000:  # each time q000 households are allocated accommodation
+        if len(list_worker_family) > 1000:  # each time 1000 households are allocated accommodation
             ll = random.sample(list_worker_family, 1000)
         else:
             ll = list_worker_family
