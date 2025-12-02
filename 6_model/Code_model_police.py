@@ -124,7 +124,7 @@ def family_house_price():
     return dic_home_price
 
 
-def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work,dic_id_workplace,dic_id_home):
+def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work,dic_id_workplace,dic_id_home,dic_id_change_home):
     dic_home_capacity=copy.deepcopy(dic_home)
     for h in dic_home_capacity:
         dic_home_capacity[h] = 0
@@ -582,4 +582,4 @@ if __name__ == '__main__':
     dic_home_one_two, dic_home_three_four, dic_home, dic_id_workplace,dic_id_home = home_capacity()
     dic_work = household_id_member()
     dic_home_price = family_house_price()
-    model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work,dic_id_workplace,dic_id_home)
+    model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work,dic_id_workplace,dic_id_home,dic_id_change_home)
