@@ -60,7 +60,7 @@ def home_capacity():  #
                 dic_home[home] = 4
             else:
                 dic_home[home] = dic_home[home] + 4
-    return dic_home_one_two,dic_home_three_four,dic_home
+    return dic_home_one_two,dic_home_three_four,dic_home,dic_id_workplace,dic_id_home
 
 def household_id_member():   # household_id:household_member_id
     dic_work = {}
@@ -89,7 +89,7 @@ def family_house_price():
             dic_home_price[(row[0])] = float(row[1])
     return dic_home_price
 
-def model(dic_home_one_two,dic_home_three_four,dic_home,dic_home_price,dic_work):
+def model(dic_home_one_two,dic_home_three_four,dic_home,dic_id_workplace,dic_id_home):
     ###model
     dic_home_capacity=copy.deepcopy(dic_home)
     file = open('D:/main_code/model/result_model.txt', 'w')
@@ -315,7 +315,7 @@ if __name__ == '__main__':
         center = str(lat3) + ',' + str(lon3)
         point_center_linkid[origin] = (origin_center, center, line[3])
 
-    dic_home_one_two,dic_home_three_four,dic_home = home_capacity()
+    dic_home_one_two,dic_home_three_four,dic_home,dic_id_workplace,dic_id_home = home_capacity()
     dic_work = household_id_member()
     dic_home_price = family_house_price()
-    model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price,dic_work)
+    model(dic_home_one_two,dic_home_three_four,dic_home,dic_id_workplace,dic_id_home)
