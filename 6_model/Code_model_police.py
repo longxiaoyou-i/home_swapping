@@ -93,7 +93,7 @@ def home_capacity():  #
                 dic_home[home] = 4
             else:
                 dic_home[home] = dic_home[home] + 4
-    return dic_home_one_two, dic_home_three_four, dic_home, dic_id_workplace,dic_id_home
+    return dic_home_one_two, dic_home_three_four, dic_home
 
 
 def household_id_member():  # household_id:household_member_id
@@ -124,8 +124,7 @@ def family_house_price():
     return dic_home_price
 
 
-def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work,dic_id_workplace,dic_id_home,dic_id_change_home):
-    dic_home_capacity=copy.deepcopy(dic_home)
+def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work, dic_id_change_home):
     for h in dic_home_capacity:
         dic_home_capacity[h] = 0
     file = open('D:/main_code/model/result_model_police.txt', 'w')
@@ -383,7 +382,7 @@ def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_w
                     lat_w4 = float(dic_id_workplace[dic_work[j][3]].split(',')[0])
                     dis_worker4 = round(get_distance(lon_w4, lat_w4, lon_h, lat_h), 4)
                     A = capacity * (1 + capacity_select) / pow(
-                            ((dis_worker1+1) * (dis_worker2+1) * (dis_worker3+1) * (dis_worker4+1)), 1 / 4)
+                        (dis_worker1 * dis_worker2 * dis_worker3 * dis_worker4) + 1, 1 / 4)
                     E = 1 - abs(origin_price - change_price) / origin_price
                     if h in dic_home_three_four:
                         if E > 0 and dic_home_three_four[h] > 0:
@@ -453,7 +452,7 @@ def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_w
                         lat_w4 = float(dic_id_workplace[dic_work[j][3]].split(',')[0])
                         dis_worker4 = round(get_distance(lon_w4, lat_w4, lon_h, lat_h), 4)
                         A = capacity * (1 + capacity_select) / pow(
-                            ((dis_worker1+1) * (dis_worker2+1) * (dis_worker3+1) * (dis_worker4+1)), 1 / 4)
+                            (dis_worker1 * dis_worker2 * dis_worker3 * dis_worker4) + 1, 1 / 4)
                         E = 1 - abs(origin_price - change_price) / origin_price
                         if h in dic_home_three_four:
                             if dic_home_three_four[h] > 0:
@@ -472,23 +471,27 @@ def model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_w
                 if dic_select_home_P_range[n][0] <= m < dic_select_home_P_range[n][1]:
                     select_home.append(n)
             o = random.choice(select_home)
-            dic_home_select[j] = o
-            if len(dic_work[j]) == 1 or len(dic_work[j]) == 2:
-                if o not in dic_home_id_select_one_two.keys():
-                    dic_home_id_select_one_two[o] = [j]
-                else:
-                    dic_home_id_select_one_two[o] = dic_home_id_select_one_two[o] + [j]
+            sum_select_same_home_opt = 0
+            if o == dic_id_change_home[dic_work[j][0]]:
+                dic_home_select[j] = o
+                sum_select_same_home_opt = sum_select_same_home_opt + 1
+                if len(dic_work[j]) == 1 or len(dic_work[j]) == 2:
+                    if o not in dic_home_id_select_one_two.keys():
+                        dic_home_id_select_one_two[o] = [j]
+                    else:
+                        dic_home_id_select_one_two[o] = dic_home_id_select_one_two[o] + [j]
 
-            if len(dic_work[j]) == 3 or len(dic_work[j]) == 4:
-                if o not in dic_home_id_select_three_four.keys():
-                    dic_home_id_select_three_four[o] = [j]
-                else:
-                    dic_home_id_select_three_four[o] = dic_home_id_select_three_four[o] + [j]
+                if len(dic_work[j]) == 3 or len(dic_work[j]) == 4:
+                    if o not in dic_home_id_select_three_four.keys():
+                        dic_home_id_select_three_four[o] = [j]
+                    else:
+                        dic_home_id_select_three_four[o] = dic_home_id_select_three_four[o] + [j]
 
-            if o not in dic_home_id_select.keys():
-                dic_home_id_select[o] = [j]
-            else:
-                dic_home_id_select[o] = dic_home_id_select[o] + [j]
+
+                if o not in dic_home_id_select.keys():
+                    dic_home_id_select[o] = [j]
+                else:
+                    dic_home_id_select[o] = dic_home_id_select[o] + [j]
         #####
         for id_select_home in dic_home_id_select:
             if id_select_home in dic_home_id_select_one_two:
@@ -579,7 +582,7 @@ if __name__ == '__main__':
         center = str(lat3) + ',' + str(lon3)
         point_center_linkid[origin] = (origin_center, center, line[3])
     dic_id_change_home = id_change_home()
-    dic_home_one_two, dic_home_three_four, dic_home, dic_id_workplace,dic_id_home = home_capacity()
+    dic_home_one_two, dic_home_three_four, dic_home = home_capacity()
     dic_work = household_id_member()
     dic_home_price = family_house_price()
-    model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work,dic_id_workplace,dic_id_home,dic_id_change_home)
+    model(dic_home_one_two, dic_home_three_four, dic_home, dic_home_price, dic_work)
